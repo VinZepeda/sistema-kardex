@@ -1,0 +1,23 @@
+# Configuración local
+conexion.php
+.env
+
+# Datos de XAMPP
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Sistema operativo
+Thumbs.db
+.DS_Store
+
+# Editores
+.vscode/
+
+# Dependencias
+vendor/
+
+# Datos de base de datos locales
+*.sql
