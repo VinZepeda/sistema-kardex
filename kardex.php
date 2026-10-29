@@ -41,6 +41,7 @@ $sql = "
 
         e.correo,
         e.telefono,
+        e.foto,
 
         e.fecha_nacimiento,
         e.fecha_ingreso,
@@ -171,19 +172,77 @@ $titulo = "Mi Kardex";
 
 
 require_once "includes/header.php";
+include "includes/menu.php";
 
 ?>
 
+<div class="kardex-profile">
 
-<main class="main-content">
+    <div class="kardex-photo">
+
+        <?php if (!empty($empleado["foto"])): ?>
+
+            <img
+                src="<?= htmlspecialchars(
+                    $empleado["foto"],
+                    ENT_QUOTES,
+                    "UTF-8"
+                ) ?>"
+                alt="Fotografía de <?= htmlspecialchars(
+                    $empleado["nombre"],
+                    ENT_QUOTES,
+                    "UTF-8"
+                ) ?>"
+            >
+
+        <?php else: ?>
+
+            <div class="kardex-no-photo">
+                Sin fotografía
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+    <div class="kardex-employee-name">
+        
+
+        <h2>
+            <?= htmlspecialchars(
+                $empleado["nombre"] . " " .
+                $empleado["apellido_paterno"] . " " .
+                $empleado["apellido_materno"],
+                ENT_QUOTES,
+                "UTF-8"
+            ) ?>
+        </h2>
+
+        <Strong>
+
+        <p>
+            <?= htmlspecialchars(
+                $empleado["puesto"] ?? "Sin puesto",
+                ENT_QUOTES,
+                "UTF-8"
+            ) ?>
+        </p>
+        </Strong>
+
+    </div>
+
+</div>
+
+
+<main class="main-kardex-content">
 
 
 
 
-    <div class="page-header">
+    <div class="title-kardex">
 
 
-        <div>
+        <div >
 
             <h2>
                 Mi Kardex
@@ -194,18 +253,6 @@ require_once "includes/header.php";
             </p>
 
         </div>
-
-
-        <a
-            href="editar_perfil.php"
-            class="action-button"
-        >
-            ✏️ Editar mis datos
-        </a>
-
-
-    </div>
-
 
     <section class="content-card">
 
@@ -586,23 +633,13 @@ require_once "includes/header.php";
 
 
     
-    <section class="dashboard-actions">
+    <section class="dashboard-actions2">
 
 
-        <a
-            href="editar_perfil.php"
-            class="action-button"
-        >
+        <a href="editar_perfil.php" class="action-button1">
             ✏️ Editar mis datos
         </a>
 
-
-        <a
-            href="dashboard.php"
-            class="action-button secondary"
-        >
-            ← Regresar al inicio
-        </a>
 
 
     </section>

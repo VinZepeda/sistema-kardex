@@ -38,11 +38,11 @@ $paginaActual = basename($_SERVER["PHP_SELF"]);
         </a>
 
         <a
-            href="calendario.php"
-            class="<?= $paginaActual === 'calendario.php' ? 'active' : '' ?>"
+            href="Justificante.php"
+            class="<?= $paginaActual === 'Justificante.php' ? 'active' : '' ?>"
         >
             <span>📅</span>
-            <span>Calendario</span>
+            <span>Justificante</span>
         </a>
 
         <a

@@ -16,130 +16,6 @@ function alternarMenu() {
 
 
 // ========================================
-// CALENDARIO
-// ========================================
-
-let fechaCalendario = new Date();
-
-
-function generarCalendario() {
-
-    const calendario = document.getElementById("calendario");
-
-    const tituloMes = document.getElementById("mesActual");
-
-    if (!calendario || !tituloMes) {
-
-        return;
-
-    }
-
-
-    calendario.innerHTML = "";
-
-
-    const año = fechaCalendario.getFullYear();
-
-    const mes = fechaCalendario.getMonth();
-
-
-    const nombresMeses = [
-        "Enero",
-        "Febrero",
-        "Marzo",
-        "Abril",
-        "Mayo",
-        "Junio",
-        "Julio",
-        "Agosto",
-        "Septiembre",
-        "Octubre",
-        "Noviembre",
-        "Diciembre"
-    ];
-
-
-    tituloMes.textContent =
-        nombresMeses[mes] + " " + año;
-
-
-    let primerDia = new Date(año, mes, 1).getDay();
-
-    let ultimoDia = new Date(año, mes + 1, 0).getDate();
-
-
-    // Convertir domingo = 0 a lunes = 0
-    primerDia = primerDia === 0 ? 6 : primerDia - 1;
-
-
-    // Espacios antes del primer día
-
-    for (let i = 0; i < primerDia; i++) {
-
-        const espacio = document.createElement("div");
-
-        espacio.classList.add("calendar-day", "empty");
-
-        calendario.appendChild(espacio);
-
-    }
-
-
-    // Días del mes
-
-    for (let dia = 1; dia <= ultimoDia; dia++) {
-
-        const elementoDia = document.createElement("div");
-
-        elementoDia.classList.add("calendar-day");
-
-        elementoDia.textContent = dia;
-
-
-        const hoy = new Date();
-
-
-        if (
-            dia === hoy.getDate() &&
-            mes === hoy.getMonth() &&
-            año === hoy.getFullYear()
-        ) {
-
-            elementoDia.classList.add("today");
-
-        }
-
-
-        calendario.appendChild(elementoDia);
-
-    }
-
-}
-
-
-function mesAnterior() {
-
-    fechaCalendario.setMonth(
-        fechaCalendario.getMonth() - 1
-    );
-
-    generarCalendario();
-
-}
-
-
-function mesSiguiente() {
-
-    fechaCalendario.setMonth(
-        fechaCalendario.getMonth() + 1
-    );
-
-    generarCalendario();
-
-}
-
-
-// ========================================
 // BUSCAR EMPLEADO
 // ========================================
 
@@ -151,31 +27,32 @@ function buscarEmpleado() {
     const tabla =
         document.getElementById("tablaPersonal");
 
+    const contador =
+        document.getElementById(
+            "contadorResultados"
+        );
 
     if (!input || !tabla) {
-
         return;
-
     }
-
 
     const texto =
         input.value.toLowerCase();
 
-
     const filas =
         tabla.getElementsByTagName("tr");
 
+    let visibles = 0;
 
     for (let i = 0; i < filas.length; i++) {
 
         const contenido =
             filas[i].textContent.toLowerCase();
 
-
         if (contenido.includes(texto)) {
 
             filas[i].style.display = "";
+            visibles++;
 
         } else {
 
@@ -185,15 +62,30 @@ function buscarEmpleado() {
 
     }
 
+    if (contador) {
+        contador.textContent = visibles;
+    }
 }
 
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-// ========================================
-// INICIALIZACIÓN
-// ========================================
+        const input =
+            document.getElementById(
+                "buscarPersonal"
+            );
 
-document.addEventListener("DOMContentLoaded", function () {
+        if (input) {
 
-    generarCalendario();
+            buscarEmpleado();
 
-});
+            input.addEventListener(
+                "input",
+                buscarEmpleado
+            );
+
+        }
+
+    }
+);

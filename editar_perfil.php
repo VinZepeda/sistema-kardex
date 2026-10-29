@@ -22,6 +22,7 @@ if (!$idEmpleado) {
 
 $mensaje = "";
 $tipoMensaje = "";
+$fotoActual = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -39,6 +40,82 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $fechaNacimiento = $_POST["fecha_nacimiento"] ?? "";
 
     $horario = trim($_POST["horario"] ?? "");
+    $fotoNueva = null;
+  
+///foto
+
+    if (
+    isset($_FILES["foto"]) &&
+    $_FILES["foto"]["error"] !== UPLOAD_ERR_NO_FILE
+) {
+
+    if ($_FILES["foto"]["error"] !== UPLOAD_ERR_OK) {
+
+        $mensaje = "Ocurrió un error al subir la fotografía.";
+        $tipoMensaje = "error";
+
+    } elseif ($_FILES["foto"]["size"] > 2 * 1024 * 1024) {
+
+        $mensaje = "La fotografía no puede superar los 2 MB.";
+        $tipoMensaje = "error";
+
+    } else {
+
+        $tiposPermitidos = [
+            "image/jpeg" => "jpg",
+            "image/png"  => "png"
+        ];
+
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+        $tipoReal = $finfo->file($_FILES["foto"]["tmp_name"]);
+
+        if (!isset($tiposPermitidos[$tipoReal])) {
+
+            $mensaje = "La fotografía debe ser JPG o PNG.";
+            $tipoMensaje = "error";
+
+        } else {
+
+            $extension = $tiposPermitidos[$tipoReal];
+
+            $nombreArchivo =
+                "empleado_" .
+                $idEmpleado .
+                "_" .
+                bin2hex(random_bytes(8)) .
+                "." .
+                $extension;
+
+            $directorioFotos = __DIR__ . "/img/empleados/";
+
+            if (!is_dir($directorioFotos)) {
+                mkdir($directorioFotos, 0755, true);
+            }
+
+            $rutaFisica =
+                $directorioFotos . $nombreArchivo;
+
+            if (
+                move_uploaded_file(
+                    $_FILES["foto"]["tmp_name"],
+                    $rutaFisica
+                )
+            ) {
+
+                $fotoNueva =
+                    "img/empleados/" . $nombreArchivo;
+
+            } else {
+
+                $mensaje =
+                    "No fue posible guardar la fotografía.";
+
+                $tipoMensaje = "error";
+            }
+        }
+    }
+}
 
 
     if ($nombre === "" || $apellidoPaterno === "") {
@@ -125,54 +202,55 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-            $sql = "
-                UPDATE empleados
-
-                SET
-                    nombre = ?,
-                    apellido_paterno = ?,
-                    apellido_materno = ?,
-                    curp = ?,
-                    rfc = ?,
-                    correo = ?,
-                    telefono = ?,
-                    fecha_nacimiento = NULLIF(?, ''),
-                    horario = ?
-
-                WHERE id_empleado = ?
-            ";
+           $sql = "
+    UPDATE empleados
+    SET
+        nombre = ?,
+        apellido_paterno = ?,
+        apellido_materno = ?,
+        curp = ?,
+        rfc = ?,
+        correo = ?,
+        telefono = ?,
+        fecha_nacimiento = NULLIF(?, ''),
+        horario = ?,
+        foto = COALESCE(?, foto)
+    WHERE id_empleado = ?
+";
 
             $stmt = $conexion->prepare($sql);
 
             $stmt->bind_param(
-                "sssssssssi",
-                $nombre,
-                $apellidoPaterno,
-                $apellidoMaterno,
-                $curp,
-                $rfc,
-                $correo,
-                $telefono,
-                $fechaNacimiento,
-                $horario,
-                $idEmpleado
-            );
+    "ssssssssssi",
+    $nombre,
+    $apellidoPaterno,
+    $apellidoMaterno,
+    $curp,
+    $rfc,
+    $correo,
+    $telefono,
+    $fechaNacimiento,
+    $horario,
+    $fotoNueva,
+    $idEmpleado
+);
 
 
-            if ($stmt->execute()) {
+           if ($stmt->execute()) {
 
-                $mensaje =
-                    "Tus datos se actualizaron correctamente.";
+    header("Location: kardex.php?id=" . $idEmpleado);
+    exit();
 
-                $tipoMensaje = "exito";
+    $mensaje =
+        "Tus datos han sido actualizados correctamente.";
 
-            } else {
+} else {
 
-                $mensaje =
-                    "Ocurrió un error al actualizar tus datos.";
+    $mensaje =
+        "Ocurrió un error al actualizar tus datos.";
 
-                $tipoMensaje = "error";
-            }
+    $tipoMensaje = "error";
+}
 
             $stmt->close();
         }
@@ -194,6 +272,7 @@ $sqlEmpleado = "
 
         e.correo,
         e.telefono,
+        e.foto,
 
         e.fecha_nacimiento,
 
@@ -238,31 +317,36 @@ $stmtEmpleado->bind_param(
     $idEmpleado
 );
 
-$sqlEmpleado = "SELECT id_empleado, nombre FROM empleados Where id_empleado = ? ";
+$stmtEmpleado = $conexion->prepare($sqlEmpleado);
 
-
-$stmtEmpleado->execute();
-$resultadoEmpleado = $stmtEmpleado->get_result();
-$empleado = $resultadoEmpleado->fetch_assoc();
-$stmtEmpleado->close();
-
-
-
-
-if (!$empleado) {
-
-    echo "No se encontró la información del empleado.";
-
-    exit();
+if (!$stmtEmpleado) {
+    die("Error al preparar la consulta: " . $conexion->error);
 }
 
+$stmtEmpleado->bind_param(
+    "i",
+    $idEmpleado
+);
+
+if (!$stmtEmpleado->execute()) {
+    die("Error al ejecutar la consulta: " . $stmtEmpleado->error);
+}
+
+$resultadoEmpleado = $stmtEmpleado->get_result();
+
+$empleado = $resultadoEmpleado->fetch_assoc();
+
+$stmtEmpleado->close();
+
+if (!$empleado) {
+    echo "No se encontró la información del empleado.";
+    exit();
+}
 
 $titulo = "Editar mis datos";
 
 require_once "includes/header.php";
 include "includes/menu.php";
-
-
 ?>
 
 
@@ -333,7 +417,53 @@ include "includes/menu.php";
             method="POST"
             action="editar_perfil.php"
             class="edit-form"
+            enctype="multipart/form-data"
         >
+
+        <!-- FOTOGRAFÍA -->
+
+<div class="photo-upload">
+
+    <label for="foto">
+        Fotografía del empleado
+    </label>
+
+    <div class="photo-preview">
+
+        <?php if (!empty($empleado["foto"])): ?>
+
+            <img
+                src="<?= htmlspecialchars(
+                    $empleado["foto"],
+                    ENT_QUOTES,
+                    "UTF-8"
+                ) ?>"
+                alt="Fotografía del empleado"
+                class="employee-photo"
+            >
+
+        <?php else: ?>
+
+            <div class="no-photo">
+                Sin fotografía
+            </div>
+
+        <?php endif; ?>
+
+    </div>
+
+    <input
+        type="file"
+        id="foto"
+        name="foto"
+        accept="image/jpeg,image/png"
+    >
+
+    <small>
+        Formatos permitidos: JPG o PNG. Máximo 2 MB.
+    </small>
+
+</div>
 
 
             <!-- NOMBRE -->
@@ -686,7 +816,7 @@ include "includes/menu.php";
 
 
                 <a
-                    href="dashboard.php"
+                    href="kardex.php"
                     class="action-button-secondary"
                 >
                     ← Cancelar

@@ -21,3 +21,7 @@ vendor/
 
 # Datos de base de datos locales
 *.sql
+
+# Fotografías reales de empleados
+img/empleados/*
+!img/empleados/.gitkeep
