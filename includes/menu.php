@@ -4,15 +4,13 @@ $paginaActual = basename($_SERVER["PHP_SELF"]);
 
 ?>
 
+
 <aside class="sidebar" id="sidebar">
 
+
     <div class="sidebar-header">
-
-        <div class="sidebar-logo">
-            📋
-        </div>
-
-        <div>
+        
+        <div class="sidebar-logo"> 
             <h2>Kardex</h2>
             <p>Personal</p>
         </div>
@@ -25,7 +23,6 @@ $paginaActual = basename($_SERVER["PHP_SELF"]);
             href="dashboard.php"
             class="<?= $paginaActual === 'dashboard.php' ? 'active' : '' ?>"
         >
-            <span>🏠</span>
             <span>Inicio</span>
         </a>
 
@@ -33,7 +30,6 @@ $paginaActual = basename($_SERVER["PHP_SELF"]);
             href="kardex.php"
             class="<?= $paginaActual === 'kardex.php' ? 'active' : '' ?>"
         >
-            <span>👤</span>
             <span>Mi Kardex</span>
         </a>
 
@@ -41,7 +37,6 @@ $paginaActual = basename($_SERVER["PHP_SELF"]);
             href="Justificante.php"
             class="<?= $paginaActual === 'Justificante.php' ? 'active' : '' ?>"
         >
-            <span>📅</span>
             <span>Justificante</span>
         </a>
 
@@ -49,24 +44,25 @@ $paginaActual = basename($_SERVER["PHP_SELF"]);
             href="personal.php"
             class="<?= $paginaActual === 'personal.php' ? 'active' : '' ?>"
         >
-            <span>👥</span>
             <span>Personal</span>
         </a>
+
 
     </nav>
 
     <div class="sidebar-footer">
 
-        <a href="logout.php" class="logout-button">
-
-            <span>🚪</span>
-
-            <span>
-                Cerrar sesión
-            </span>
-
-        </a>
+    
+        <div class="logo-perfil">
+            
+            <a href="perfil_lateral.php" class="ver-perfil-button">
+                <img src="img/logo.png" alt="Abiri Perfil" style="width:50px; height:50px;" >
+            
+            </a>
+           
+        </div>
 
     </div>
+
 
 </aside>

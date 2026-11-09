@@ -204,98 +204,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="login-layout">
 
 
-    <!-- ========================================
-         LADO IZQUIERDO
-         ======================================== -->
 
-    <section class="login-brand">
-
-
-        <div class="brand-content">
-
-
-            <!-- CÍRCULO -->
-
-            <div class="brand-circle">
-
-
-                <!-- TEXTO EN ARCO -->
-
-                <svg
-                    class="brand-title-svg"
-                    viewBox="0 0 500 500"
-                >
-
-                    <defs>
-
-                        <path
-                            id="textoArco"
-                            d="
-                                M 85,250
-                                A 165,165
-                                0 0,1
-                                415,250
-                            "
-                        />
-
-                    </defs>
-
-
-                    <text class="brand-arc-text">
-
-                        <textPath
-                            href="#textoArco"
-                            startOffset="50%"
-                        >
-
-                            SISTEMA DE KARDEX
-
-                        </textPath>
-
-                    </text>
-
-                </svg>
-
-
-                <!-- IMAGEN CENTRAL -->
-
-                <div class="brand-image">
-
-                    <img
-                        src="img/logo.png"
-                        alt="Logo del Sistema de Kardex"
-                    >
-
-                </div>
-
-
-            </div>
-
-
-            <!-- TEXTO DEBAJO DEL CÍRCULO -->
-
-            <div class="brand-subtitle">
-
-                <span>
-                    Sistema de control
-                </span>
-
-                <strong>
-                    de personal
-                </strong>
-
-            </div>
-
-
-        </div>
-
-
-    </section>
-
-
-    <!-- ========================================
-         LADO DERECHO
-         ======================================== -->
+    <div class="welcome-title">
+        Kardex de Empleado
+    </div>
 
     <section class="login-form-section">
 
@@ -303,22 +215,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <div class="login-form-card">
 
 
-            <!-- ENCABEZADO -->
 
             <div class="form-header">
 
                 <h1>
-                    Bienvenido
+                    Iniciar sesión
                 </h1>
 
-                <p>
-                    Inicia sesión para continuar
-                </p>
+                
 
             </div>
 
 
-            <!-- MENSAJE DE ERROR -->
 
             <?php if ($mensaje !== ""): ?>
 
@@ -335,10 +243,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php endif; ?>
 
 
-            <!-- ====================================
-                 FORMULARIO
-                 ==================================== -->
-
             <form
                 method="POST"
                 action="index.php"
@@ -346,7 +250,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             >
 
 
-                <!-- USUARIO -->
 
                 <div class="form-group">
 
@@ -383,7 +286,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
 
-                <!-- CONTRASEÑA -->
 
                 <div class="form-group">
 
@@ -415,7 +317,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
 
 
-                <!-- BOTÓN LOGIN -->
 
                 <button
                     type="submit"
@@ -430,9 +331,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </form>
 
 
-            <!-- ====================================
-                 REGISTRO
-                 ==================================== -->
+        
 
             <div class="register-section">
 
@@ -455,13 +354,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-            <!-- PIE -->
 
             <div class="login-footer">
 
                 <span>
-                    Sistema de Kardex
-                </span>
+                pendiente
+            </span>
 
             </div>
 

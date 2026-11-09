@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -19,7 +20,9 @@
 
     <header class="topbar">
 
-        <div class="topbar-left">
+
+    <!--
+        <div class="topbar-right">
 
             <button
                 type="button"
@@ -29,11 +32,10 @@
                 ☰
             </button>
 
-            <h1>
-                Sistema de Kardex
-            </h1>
 
         </div>
+        
+
 
         <div class="topbar-user">
 
@@ -43,5 +45,6 @@
             </span>
 
         </div>
+        --->
 
     </header>
