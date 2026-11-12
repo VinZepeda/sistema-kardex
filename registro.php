@@ -5,9 +5,6 @@ session_start();
 require_once "conexion.php";
 
 
-// ========================================
-// SI YA HAY UNA SESIÓN ACTIVA
-// ========================================
 
 if (isset($_SESSION["usuario"])) {
 
@@ -17,24 +14,14 @@ if (isset($_SESSION["usuario"])) {
 }
 
 
-// ========================================
-// VARIABLES
-// ========================================
 
 $mensaje = "";
 $tipoMensaje = "";
 
 
-// ========================================
-// PROCESAR REGISTRO
-// ========================================
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // ----------------------------------------
-    // DATOS PERSONALES
-    // ----------------------------------------
-
+  
     $nombre = trim($_POST["nombre"] ?? "");
 
     $apellido_paterno =
@@ -56,10 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         trim($_POST["telefono"] ?? "");
 
 
-    // ----------------------------------------
-    // DATOS DE ACCESO
-    // ----------------------------------------
-
     $usuario =
         trim($_POST["usuario"] ?? "");
 
@@ -70,9 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_POST["password_confirmar"] ?? "";
 
 
-    // ========================================
-    // VALIDAR CAMPOS OBLIGATORIOS
-    // ========================================
+ 
 
     if (
         $nombre === "" ||
@@ -92,9 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     }
 
-    // ========================================
-    // VALIDAR CONTRASEÑAS
-    // ========================================
+
 
     elseif ($password !== $password_confirmar) {
 
@@ -105,9 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     }
 
-    // ========================================
-    // VALIDAR LONGITUD DE CONTRASEÑA
-    // ========================================
 
     elseif (strlen($password) < 6) {
 
@@ -118,9 +94,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     }
 
-    // ========================================
-    // VALIDAR CORREO
-    // ========================================
 
     elseif (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
 
@@ -131,9 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     }
 
-    // ========================================
-    // VALIDAR CURP
-    // ========================================
+
 
     elseif (strlen($curp) !== 18) {
 
@@ -144,9 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     }
 
-    // ========================================
-    // VALIDAR RFC
-    // ========================================
+
 
     elseif (strlen($rfc) < 12 || strlen($rfc) > 13) {
 
@@ -159,9 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     else {
 
-        // ========================================
-        // COMPROBAR DATOS DUPLICADOS
-        // ========================================
+
 
         $sql = "
             SELECT
@@ -243,18 +210,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
 
 
-            // ========================================
-            // COMENZAR TRANSACCIÓN
-            // ========================================
 
             $conexion->begin_transaction();
 
 
             try {
 
-                // ========================================
-                // BUSCAR ROL EMPLEADO
-                // ========================================
+
 
                 $sqlRol = "
                     SELECT id_rol
@@ -283,9 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     (int)$rol["id_rol"];
 
 
-                // ========================================
-                // BUSCAR ESTATUS ACTIVO
-                // ========================================
+        
 
                 $sqlEstatus = "
                     SELECT id_estatus
@@ -315,9 +275,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     (int)$estatus["id_estatus"];
 
 
-                // ========================================
-                // INSERTAR EMPLEADO
-                // ========================================
+     
 
                 $sqlEmpleado = "
                     INSERT INTO empleados (
@@ -361,9 +319,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
 
 
-                // ========================================
-                // OBTENER ID DEL EMPLEADO
-                // ========================================
+        
 
                 $id_empleado =
                     $conexion->insert_id;
@@ -372,9 +328,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmtEmpleado->close();
 
 
-                // ========================================
-                // GENERAR HASH DE CONTRASEÑA
-                // ========================================
 
                 $password_hash =
                     password_hash(
@@ -392,9 +345,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }
 
 
-                // ========================================
-                // INSERTAR USUARIO
-                // ========================================
+ 
 
                 $sqlUsuario = "
                     INSERT INTO usuarios (
@@ -434,9 +385,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $stmtUsuario->close();
 
 
-                // ========================================
-                // CONFIRMAR TRANSACCIÓN
-                // ========================================
+
 
                 $conexion->commit();
 
@@ -462,9 +411,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             } catch (Exception $e) {
 
-                // ========================================
-                // DESHACER REGISTRO
-                // ========================================
+
 
                 $conexion->rollback();
 
@@ -521,9 +468,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <div class="login-card registro-card">
 
 
-        <!-- ========================================
-             ENCABEZADO
-             ======================================== -->
 
         <div class="login-header">
 
@@ -538,9 +482,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
 
 
-        <!-- ========================================
-             MENSAJE
-             ======================================== -->
 
         <?php if ($mensaje !== ""): ?>
 
@@ -562,9 +503,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php endif; ?>
 
 
-        <!-- ========================================
-             FORMULARIO
-             ======================================== -->
 
         <form
             method="POST"
@@ -572,16 +510,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         >
 
 
-            <!-- ====================================
-                 DATOS PERSONALES
-                 ==================================== -->
+
 
             <h3 class="form-section-title">
                 Datos personales
             </h3>
 
 
-            <div class="form-group">
+            <div class="form-group-cuenta-nueva">
 
                 <label for="nombre">
                     Nombre *
@@ -603,7 +539,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group-cuenta-nueva">
 
                 <label for="apellido_paterno">
                     Apellido paterno *
@@ -625,7 +561,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-            <div class="form-group">
+            <div class="form-group-cuenta-nueva">
 
                 <label for="apellido_materno">
                     Apellido materno
@@ -736,9 +672,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-            <!-- ====================================
-                 DATOS DE ACCESO
-                 ==================================== -->
+    
 
             <h3 class="form-section-title">
                 Datos de acceso
@@ -804,10 +738,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-            <!-- ====================================
-                 INFORMACIÓN DEL SISTEMA
-                 ==================================== -->
-
             <div class="registro-info">
 
                 <strong>
@@ -828,9 +758,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
 
-            <!-- ====================================
-                 BOTÓN REGISTRAR
-                 ==================================== -->
+
 
             <button
                 type="submit"
@@ -843,9 +771,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </form>
 
 
-        <!-- ========================================
-             REGRESAR AL LOGIN
-             ======================================== -->
 
         <div class="register-section">
 

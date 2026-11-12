@@ -4,51 +4,21 @@ session_start();
 
 require_once "conexion.php";
 
-
-// ========================================
-// SI YA HAY UNA SESIÓN ACTIVA
-// ========================================
-
 if (isset($_SESSION["usuario"])) {
 
     header("Location: dashboard.php");
     exit();
-
 }
 
-
-// ========================================
-// VARIABLES
-// ========================================
-
 $mensaje = "";
-
-
-// ========================================
-// PROCESAR LOGIN
-// ========================================
-
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $usuario = trim($_POST["usuario"] ?? "");
     $password = $_POST["password"] ?? "";
 
-
-    // ========================================
-    // VALIDAR CAMPOS
-    // ========================================
-
     if ($usuario === "" || $password === "") {
-
         $mensaje = "Por favor, completa todos los campos.";
-
     } else {
-
-
-        // ========================================
-        // BUSCAR USUARIO
-        // ========================================
-
         $sql = "
             SELECT
                 u.id_usuario,
@@ -57,112 +27,60 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 u.password,
                 u.id_rol,
                 u.activo
-
             FROM usuarios u
-
             WHERE u.usuario = ?
-
             LIMIT 1
         ";
 
-
         $stmt = $conexion->prepare($sql);
-
         $stmt->bind_param("s", $usuario);
-
         $stmt->execute();
-
         $resultado = $stmt->get_result();
-
         $usuarioBD = $resultado->fetch_assoc();
 
-
-        // ========================================
-        // VERIFICAR USUARIO Y CONTRASEÑA
-        // ========================================
-
-        if (!$usuarioBD) {
-
-            $mensaje =
-                "El usuario o la contraseña son incorrectos.";
-
+        if (!$usuarioBD) { $mensaje = "El usuario o la contraseña son incorrectos.";
+        
         } elseif ((int)$usuarioBD["activo"] !== 1) {
-
             $mensaje =
                 "Este usuario se encuentra inactivo.";
-
         } elseif (
             !password_verify(
                 $password,
                 $usuarioBD["password"]
             )
-        ) {
-
-            $mensaje =
+        ) { $mensaje =
                 "El usuario o la contraseña son incorrectos.";
-
         } else {
-
-
-            // ========================================
-            // LOGIN CORRECTO
-            // ========================================
-
             session_regenerate_id(true);
-
-
             $_SESSION["usuario"] =
                 $usuarioBD["usuario"];
-
             $_SESSION["id_usuario"] =
                 $usuarioBD["id_usuario"];
-
             $_SESSION["id_empleado"] =
                 $usuarioBD["id_empleado"];
-
             $_SESSION["id_rol"] =
                 $usuarioBD["id_rol"];
 
-
-            // ========================================
-            // ACTUALIZAR ÚLTIMO ACCESO
-            // ========================================
-
             $sqlAcceso = "
                 UPDATE usuarios
-
                 SET ultimo_acceso = NOW()
-
-                WHERE id_usuario = ?
-            ";
-
+                WHERE id_usuario = ?";
 
             $stmtAcceso =
                 $conexion->prepare($sqlAcceso);
-
-
             $stmtAcceso->bind_param(
                 "i",
                 $usuarioBD["id_usuario"]
             );
 
-
             $stmtAcceso->execute();
-
             $stmtAcceso->close();
 
 
-            // ========================================
-            // REDIRECCIÓN
-            // ========================================
-
             header("Location: dashboard.php");
-
             exit();
 
         }
-
-
         $stmt->close();
 
     }
@@ -206,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     <div class="welcome-title">
-        Kardex de Empleado
+        KARDEX
     </div>
 
     <section class="login-form-section">
@@ -216,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-            <div class="form-header">
+            <div class="login-form-header">
 
                 <h1>
                     Iniciar sesión
@@ -243,15 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php endif; ?>
 
 
-            <form
-                method="POST"
-                action="index.php"
-                class="login-form"
-            >
 
 
+        <form method="POST" action="index.php" class="login-form">
 
-                <div class="form-group">
+
+                <div class="login-form-group">
 
 
                     <label for="usuario">
@@ -259,12 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </label>
 
 
-                    <div class="input-wrapper">
-
-                        <span class="input-icon">
-                            👤
-                        </span>
-
+                    <div class="login-input-wrapper">
 
                         <input
                             type="text"
@@ -287,7 +197,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
 
-                <div class="form-group">
+                <div class="login-form-group">
 
 
                     <label for="password">
@@ -295,11 +205,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </label>
 
 
-                    <div class="input-wrapper">
-
-                        <span class="input-icon">
-                            🔒
-                        </span>
+                    <div class="login-input-wrapper">
 
 
                         <input
@@ -316,53 +222,25 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 </div>
 
+<div class="buttons-container">
+    
+              <button type="submit" class="login-button">
+            Iniciar sesión
+        </button>
 
+        </form>
 
-                <button
-                    type="submit"
-                    class="login-button"
-                >
+     <div class="register-section">
 
-                    Iniciar sesión
+        <a href="registro.php" class="register-button">
+            Registrarse
+        </a>
 
-                </button>
+        <p>¿No tienes una cuenta?</p>
 
+      </div>
 
-            </form>
-
-
-        
-
-            <div class="register-section">
-
-
-                <p>
-                    ¿No tienes una cuenta?
-                </p>
-
-
-                <a
-                    href="registro.php"
-                    class="register-button"
-                >
-
-                    Registrarse
-
-                </a>
-
-
-            </div>
-
-
-
-            <div class="login-footer">
-
-                <span>
-                pendiente
-            </span>
-
-            </div>
-
+     </div>
 
         </div>
 

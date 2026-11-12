@@ -1,68 +1,81 @@
+
 <?php
 
 $paginaActual = basename($_SERVER["PHP_SELF"]);
 
 ?>
 
+<header class="navbar">
 
-<aside class="sidebar" id="sidebar">
-
-
-    <div class="sidebar-header">
-        
-        <div class="sidebar-logo"> 
-            <h2>Kardex</h2>
-            <p>Personal</p>
-        </div>
-
+    <!-- LOGOTIPO -->
+    <div class="navbar-logo">
+        <h2>Kardex</h2>
     </div>
 
-    <nav class="sidebar-menu">
+    <!-- MENÚ HORIZONTAL -->
+    <nav class="navbar-menu">
 
         <a
             href="dashboard.php"
             class="<?= $paginaActual === 'dashboard.php' ? 'active' : '' ?>"
         >
-            <span>Inicio</span>
+            Inicio
         </a>
 
         <a
             href="kardex.php"
             class="<?= $paginaActual === 'kardex.php' ? 'active' : '' ?>"
         >
-            <span>Mi Kardex</span>
+            Mi Kardex
         </a>
 
         <a
             href="Justificante.php"
             class="<?= $paginaActual === 'Justificante.php' ? 'active' : '' ?>"
         >
-            <span>Justificante</span>
+            Justificantes
         </a>
 
         <a
             href="personal.php"
             class="<?= $paginaActual === 'personal.php' ? 'active' : '' ?>"
         >
-            <span>Personal</span>
+            Personal
         </a>
-
 
     </nav>
 
-    <div class="sidebar-footer">
+    <!-- PERFIL -->
+    <div class="navbar-profile">
+<button
+    type="button"
+    class="profile-button"
+    id="profileButton"
+    aria-label="Abrir menú de perfil"
+>
+    <img
+        src=""
+        alt="Foto de perfil"
+        class="profile-photo"
+    >
+</button>
 
-    
-        <div class="logo-perfil">
-            
-            <a href="perfil_lateral.php" class="ver-perfil-button">
-                <img src="img/logo.png" alt="Abiri Perfil" style="width:50px; height:50px;" >
-            
+        <div class="profile-dropdown" id="profileDropdown">
+
+            <a href="perfil_lateral.php">
+                Perfil
             </a>
-           
+
+            <a href="ajustes.php">
+                Ajustes
+            </a>
+
+            <a href="logout.php" class="logout-option">
+                Cerrar sesión
+            </a>
+
         </div>
 
     </div>
 
-
-</aside>
+</header>

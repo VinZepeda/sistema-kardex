@@ -1,42 +1,24 @@
 <?php
-
 $paginaActual = basename($_SERVER["PHP_SELF"]);
-
 ?>
 
 <div class="contenedor-ver-perfil">
 
-    <aside class="desplegable" id="desplegable">
+    <nav class="desplegable-menu">
 
-    <div class="desplagable-header">
-
-
-    <nav class="delplegable-menu">
-
-        <a
-            href="Perfil_personal.php"
-            class="<?= $paginaActual === 'Perfil_personal.php' ? 'active' : '' ?>"
-        >
-            <span>Perfil</span>
+        <a href="Perfil_personal.php"
+            class="<?= $paginaActual == 'Perfil_personal.php' ? 'active' : '' ?>">
+            Perfil
         </a>
 
-        <a
-            href="Ajustes.php"
-            class="<?= $paginaActual === 'Ajustes.php' ? 'active' : '' ?>"
-        >
-            <span>Ajustes</span>
+        <a href="Ajustes.php"
+            class="<?= $paginaActual == 'Ajustes.php' ? 'active' : '' ?>">
+            Ajustes
         </a>
 
         <a href="logout.php" class="logout-button">
-
-            <span>
-                Cerrar sesión
-            </span>
-
+            Cerrar sesión
         </a>
-
-         </div>
-
 
     </nav>
 

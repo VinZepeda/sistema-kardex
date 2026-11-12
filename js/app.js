@@ -89,3 +89,31 @@ document.addEventListener(
 
     }
 );
+
+
+// MENÚ DESPLEGABLE DE PERFIL
+
+const profileButton = document.getElementById("profileButton");
+const profileDropdown = document.getElementById("profileDropdown");
+
+if (profileButton && profileDropdown) {
+
+    profileButton.addEventListener("click", function(event) {
+
+        event.stopPropagation();
+
+        profileDropdown.classList.toggle("show");
+
+    });
+
+    document.addEventListener("click", function(event) {
+
+        if (!profileDropdown.contains(event.target)) {
+
+            profileDropdown.classList.remove("show");
+
+        }
+
+    });
+
+}

@@ -16,7 +16,7 @@ $sql = "
     SELECT
         e.id_empleado,
         e.nombre,
-        e.apellido_paterno,
+        e.apellido_paterno, 
         e.apellido_materno,
         e.curp,
         e.rfc,
@@ -216,19 +216,6 @@ switch ($evento["tipo_dia"]) {
 }
 
 
-$diasInhabiles = [];
-
-$sqlInhabiles = "
-SELECT
-    fecha,
-    descripcion,
-    tipo
-FROM dias_inhabiles
-";
-
-$resultadoInhabiles =
-    $conexion->query($sqlInhabiles);
-
 if ($resultadoInhabiles) {
 
     while (
@@ -274,7 +261,7 @@ if (
     "
 >
 
-⚠️ Favor de marcar tus días de incapacidad
+Favor de marcar tus días de incapacidad
 mencionados en tu justificante.
 Sea honesto al registrarlos.
 
@@ -285,119 +272,6 @@ Sea honesto al registrarlos.
 }
 
 ?>
-
-
-    <div class="page-header">
-
-        <div>
-
-            <h2>
-                Panel principal
-            </h2>
-
-            <p>
-                Información de tu cuenta y datos laborales
-            </p>
-
-        </div>
-
-    </div>
-
-    <section class="welcome-card">
-
-        <div>
-
-            <h2>
-                ¡Bienvenido,
-                <?= htmlspecialchars($empleado["nombre"]) ?>!
-            </h2>
-
-            <p>
-                Consulta la información registrada en tu Kardex.
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <section class="dashboard-grid">
-
-
-        <!-- NOMBRE -->
-
-        <div class="dashboard-card">
-
-            <div class="card-icon">
-                👤
-            </div>
-
-            <div>
-
-                <span class="card-label">
-                    Nombre completo
-                </span>
-
-                <strong>
-                    <?= htmlspecialchars($nombreCompleto) ?>
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- PUESTO -->
-
-        <div class="dashboard-card">
-
-            <div class="card-icon">
-                💼
-            </div>
-
-            <div>
-
-                <span class="card-label">
-                    Puesto
-                </span>
-
-                <strong>
-                    <?= htmlspecialchars(
-                        $empleado["puesto"] ?? "Sin asignar"
-                    ) ?>
-                </strong>
-
-            </div>
-
-        </div>
-
-
-        <!-- ESTATUS -->
-
-        <div class="dashboard-card">
-
-            <div class="card-icon">
-                📌
-            </div>
-
-            <div>
-
-                <span class="card-label">
-                    Estatus
-                </span>
-
-                <strong>
-                    <?= htmlspecialchars(
-                        $empleado["estatus"] ?? "Sin asignar"
-                    ) ?>
-                </strong>
-
-            </div>
-
-        </div>
-
-
-    </section>
 
 
     <div class="calendar-top">
@@ -461,16 +335,15 @@ Sea honesto al registrarlos.
 
                 </div>
 
+<div class="reference-item">
 
-                <div class="reference-item">
+    <span class="reference-color non-working"></span>
 
-                    <span class="reference-color non-working"></span>
+    <span>
+        Días inhábiles
+    </span>
 
-                    <span>
-                        Permisos informales
-                    </span>
-
-                </div>
+</div>
 
 
                 <div class="reference-item">
@@ -482,6 +355,16 @@ Sea honesto al registrarlos.
                     </span>
 
                 </div>
+
+                <div class="reference-item">
+
+    <span class="reference-color permission"></span>
+
+    <span>
+        Permisos
+    </span>
+
+</div>
 
 
                 <div class="reference-item">
@@ -498,7 +381,7 @@ Sea honesto al registrarlos.
                 <div class="reference-item">
 
                     <span class="reference-warning">
-                        ⚠️
+                
                     </span>
 
                     <span>
@@ -647,7 +530,7 @@ Sea honesto al registrarlos.
 
                     <div class="modal-empty">
 
-                        📅
+                        
 
                         <p>
                             No hay incidencias registradas
@@ -980,47 +863,6 @@ const esFinDeSemana =
 
 
 
-if(infoInhabil){
-
-    const etiqueta =
-        document.createElement("div");
-
-    etiqueta.className =
-        "calendar-bridge";
-
-    if(infoInhabil.tipo === "puente"){
-
-        etiqueta.textContent =
-            "⚠️ Puente";
-
-    }
-    else if(infoInhabil.tipo === "festivo"){
-
-        etiqueta.textContent =
-            "🎉 Festivo";
-
-    }
-    else{
-
-        etiqueta.textContent =
-            "🚫 Inhábil";
-
-    }
-
-    celda.appendChild(
-        etiqueta
-    );
-
-    celda.classList.remove(
-        "working"
-    );
-
-    celda.classList.add(
-        "non-working"
-    );
-
-}
-
 
 
 
@@ -1049,57 +891,42 @@ if (!esFinDeSemana) {
 
 if (infoInhabil) {
 
-    celda.classList.remove(
-        "working"
-    );
+    const tipoInhabil = String(infoInhabil.tipo || "").toLowerCase();
 
-    celda.classList.add(
-        "non-working"
-    );
+    const etiqueta = document.createElement("div");
 
-    const aviso =
-        document.createElement(
-            "div"
-        );
+    etiqueta.className = "calendar-bridge";
 
-    aviso.className =
-        "calendar-bridge";
+    if (tipoInhabil === "puente") {
 
-    if (
-        infoInhabil.tipo ===
-        "puente"
-    ) {
+        etiqueta.textContent = "⚠️ Puente";
 
-        aviso.textContent =
-            "⚠️ Puente";
+        celda.classList.add("non-working");
 
-    }
-    else if (
-        infoInhabil.tipo ===
-        "festivo"
-    ) {
+    } else if (tipoInhabil === "festivo") {
 
-        aviso.textContent =
-            "🎉 Festivo";
+        etiqueta.textContent = "🎉 Festivo";
 
-    }
-    else {
+        celda.classList.add("holiday");
 
-        aviso.textContent =
-            "🚫 Inhábil";
+    } else {
+
+        etiqueta.textContent = "🚫 Inhábil";
+
+        celda.classList.add("non-working");
 
     }
 
-    celda.appendChild(
-        aviso
-    );
+    celda.classList.remove("working");
+
+    celda.appendChild(etiqueta);
 
 }
 
 
 
-        eventos.forEach(
-            evento => {
+       eventos.slice(0, 4).forEach(
+    evento => {
 
 
                 const empleado =
@@ -1229,28 +1056,18 @@ switch (evento.tipo) {
 
        
 
-        if (eventos.length > 4) {
+       if (eventos.length > 4) {
 
+    const empleadosExtra = document.createElement("div");
 
-            const empleadosExtra =
-                document.createElement("div");
+    empleadosExtra.className = "calendar-more";
 
+    empleadosExtra.textContent =
+        "+" + (eventos.length - 4) + " empleados";
 
-            empleadosExtra.className =
-                "calendar-more";
+    celda.appendChild(empleadosExtra);
 
-
-            empleadosExtra.textContent =
-                "+" +
-                (eventos.length - 4) +
-                " empleados";
-
-
-            celda.appendChild(
-                empleadosExtra
-            );
-
-        }
+}
 
         const hoy =
             new Date();
