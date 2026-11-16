@@ -44,8 +44,6 @@ input {
 }
 
 
-
-
 body{
     font-family: Arial, Helvetica, sans-serif;
     background:#000;
@@ -253,7 +251,6 @@ body{
     color:#aaa;
 }
 
-/* Responsive */
 
 @media(max-width:768px){
 
@@ -271,18 +268,8 @@ body{
 ---------------------- dashboard + menu --------------------------------------------------------------------------------------
 
 
-    /*perfil-lateral.php*/
-
-
-
-
 
 /* menuhorizontal */
-
-
-/* =====================================
-   BARRA DE NAVEGACIÓN HORIZONTAL
-===================================== */
 
 .navbar {
     width: 100%;
@@ -302,7 +289,6 @@ body{
     z-index: 100;
 }
 
-/* LOGOTIPO */
 
 .navbar-logo h2 {
     font-family: 'Loud and Clear.otf', sans-serif;
@@ -312,7 +298,6 @@ body{
     font-weight: normal;
 }
 
-/* OPCIONES DEL MENÚ */
 
 .navbar-menu {
     display: flex;
@@ -336,46 +321,35 @@ letter-spacing: 2px;
     transition: .3s;
 }
 
-/* EFECTO AL PASAR EL CURSOR */
-
 .navbar-menu a:hover {
     border: 1px solid #007bff;
     background: #101010;
 }
 
-/* PÁGINA ACTUAL */
 
 .navbar-menu a.active {
     border: 1px solid #ff8c00;
     background: #101010;
 }
 
-/* =====================================
-   PERFIL DE USUARIO
-===================================== */
+-----perfilpersonal---
 
 .navbar-profile {
     position: relative;
     margin-left: auto;
 }
 
-/* CÍRCULO DE PERFIL */
 .profile-button {
     width: 38px;
     height: 38px;
-
     border: 2px solid #00ef19;
     border-radius: 50%;
-
     background: transparent;
     padding: 0;
-
     cursor: pointer;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     overflow: hidden;
     transition: 0.2s;
 }
@@ -388,24 +362,18 @@ letter-spacing: 2px;
 .profile-photo {
     width: 100%;
     height: 100%;
-
     object-fit: cover;
     border-radius: 50%;
 }
-/* MENÚ DESPLEGABLE */
 
 .profile-dropdown {
     display: none;
-
     position: absolute;
     top: 40px;
     right: 0;
-
     width: 145px;
-
     background: #050505;
     border: 1px solid #0051ff;
-
     box-shadow: 0 0 10px rgba(0, 81, 255, .4);
 }
 
@@ -432,9 +400,7 @@ letter-spacing: 2px;
     color: #ff5555;
 }
 
-/* =====================================
-   CONTENIDO GENERAL
-===================================== */
+
 
 .app-container {
     width: 100%;
@@ -442,9 +408,6 @@ letter-spacing: 2px;
     background: #000;
 }
 
-/* =================================
-   CORRECCIÓN DE BARRA HORIZONTAL
-================================= */
 
 header.navbar {
     display: flex !important;
@@ -452,51 +415,34 @@ header.navbar {
     flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: flex-start !important;
-
     width: 100%;
     height: 55px;
     min-height: 55px;
-
     padding: 0 15px;
     gap: 15px;
-
     background: #000;
     border-bottom: 1px solid #00ef19;
-
     box-sizing: border-box;
 }
 
-/* LOGOTIPO */
 .navbar-logo h2 {
     flex-shrink: 0;
            
 
 }
 
-/* OPCIONES */
 .navbar-menu {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-
     height: 100%;
     gap: 3px;
 }
 
-/* PERFIL A LA DERECHA */
 .navbar-profile {
     margin-left: auto !important;
     flex-shrink: 0;
 }
-
-
-
-
-
-
-
-
-
 
 ----------------------------------------
 
@@ -835,7 +781,7 @@ header.navbar {
     } 
 } 
 
--------------------------------------------------
+/**/
 
 @media (max-width: 500px) {
     
@@ -1115,8 +1061,6 @@ header.navbar {
 }
 
 
-
-
 /*--Karedex---*/
 
 .main-kardex-content {
@@ -1200,6 +1144,42 @@ header.navbar {
     width: 900px;
     box-sizing: border-box;
 } 
+
+
+------------------Banner--------------------
+.banner{
+    margin-left: 45px;
+    margin-right: 45px;
+    padding: 25px;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: #000000;
+    border: 2px solid #0059ff;
+    width: 1000px;
+    height: 250px;
+}
+
+.banner h2{
+    justify-content: center;
+    font-family: 'Michv2.ttf', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.banner p{
+    justify-content: center;
+    font-family: 'Michv2.ttf', sans-serif;
+    font-size: 15px;
+}
+
+.Banner-informativo{
+    background: black;
+    border-color: #002aff;
+    margin: 50px, 50px;
+}
+
+
 
 
 
@@ -1561,11 +1541,9 @@ header.navbar {
         align-items: flex-start;
     }
 
-
     .calendar-header h3 {
         font-size: 20px;
     }
-
 
     .calendar-button {
         width: 40px;
@@ -1575,61 +1553,38 @@ header.navbar {
 
 }
 .calendar-modal {
-
     position: fixed;
     inset: 0;
-
     background: rgba(0, 0, 0, 0.55);
-
     display: flex;
-
     align-items: center;
     justify-content: center;
-
     padding: 20px;
-
     z-index: 99999;
-
     opacity: 0;
-
     visibility: hidden;
-
     transition:
         opacity .2s ease,
         visibility .2s ease;
-
 }
 
 .calendar-modal.active {
-
     opacity: 1;
-
     visibility: visible;
 
 }
 .calendar-modal-content {
-
     width: 100%;
-
     max-width: 650px;
-
     max-height: 90vh;
-
     background: #ffffff;
-
     border-radius: 18px;
-
     overflow: hidden;
-
-    box-shadow:
-        0 20px 60px rgba(0,0,0,.25);
-
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
 }
 
 .calendar-modal.active .calendar-modal-content {
-
-    transform: translateY(0);
-
+     transform: translateY(0);
 }
 
 .calendar-modal-header {
@@ -1641,7 +1596,6 @@ header.navbar {
     color: white;
 }
 
-
 .modal-small-title {
     display: block;
     font-size: 13px;
@@ -1649,12 +1603,10 @@ header.navbar {
     margin-bottom: 4px;
 }
 
-
 .calendar-modal-header h2 {
     margin: 0;
     font-size: 22px;
 }
-
 
 .modal-close {
     width: 38px;
@@ -1668,21 +1620,16 @@ header.navbar {
     line-height: 1;
 }
 
-
 .modal-close:hover {
     background:
         rgba(255, 255, 255, 0.25);
 }
-
-
-
 
 .calendar-modal-body {
     padding: 24px;
     overflow-y: auto;
     max-height: calc(90vh - 85px);
 }
-
 
 .calendar-modal-body h3 {
     margin-top: 0;
@@ -1691,19 +1638,15 @@ header.navbar {
     font-size: 17px;
 }
 
-
-
 .modal-incidencias-section {
     margin-bottom: 25px;
 }
-
 
 .modal-incidencias-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-
 
 .modal-event {
     display: flex;
@@ -1714,13 +1657,11 @@ header.navbar {
     border-left: 5px solid;
 }
 
-
 .modal-event-icon {
     font-size: 22px;
     width: 32px;
     text-align: center;
 }
-
 
 .modal-event-info {
     display: flex;
@@ -1728,61 +1669,50 @@ header.navbar {
     gap: 2px;
 }
 
-
 .modal-event-info strong {
     font-size: 14px;
     color: #263238;
 }
-
 
 .modal-event-info span {
     font-size: 12px;
     color: #606f76;
 }
 
-
 .modal-event-info small {
     font-size: 12px;
     color: #777;
 }
-
 
 .modal-event-my-economic {
     background: #fff4dc;
     border-color: #f0a500;
 }
 
-
 .modal-event-economic {
     background: #fff0e8;
     border-color: #e47c39;
 }
-
 
 .modal-event-incapacity {
     background: #eee8ff;
     border-color: #8064c9;
 }
 
-
 .modal-event-vacation {
     background: #e32c2c;
     border-color: #43a66b;
 }
-
 
 .modal-event-permission {
     background: #fff9d9;
     border-color: #d9b52b;
 }
 
-
 .modal-event-other {
     background: #e7ebed;
     border-color: #7c8a91;
 }
-
-
 
 .modal-empty {
     text-align: center;
@@ -1792,31 +1722,24 @@ header.navbar {
     color: #6d7a80;
 }
 
-
 .modal-empty-icon {
     font-size: 30px;
     margin-bottom: 8px;
 }
-
 
 .modal-empty p {
     margin: 0;
     font-size: 14px;
 }
 
-
-
-
 .modal-register-section {
     border-top: 1px solid #e5e8ea;
     padding-top: 22px;
 }
 
-
 .form-group {
     margin-bottom: 15px;
 }
-
 
 .form-group label {
     display: block;
@@ -1838,7 +1761,6 @@ header.navbar {
     background: white;
 }
 
-
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
@@ -1847,12 +1769,10 @@ header.navbar {
         0 0 0 3px rgba(23, 107, 135, 0.10);
 }
 
-
 .form-group textarea {
     resize: vertical;
     min-height: 75px;
 }
-
 
 .btn-registrar-incidencia {
     width: 100%;
@@ -1866,23 +1786,19 @@ header.navbar {
     cursor: pointer;
 }
 
-
 .btn-registrar-incidencia:hover {
     background: #0f5269;
 }
-
 
 .btn-registrar-incidencia:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
 
-
 .modal-message {
     margin-bottom: 12px;
     font-size: 13px;
 }
-
 
 .modal-message.success {
     padding: 10px;
@@ -1891,7 +1807,6 @@ header.navbar {
     color: #24733d;
 }
 
-
 .modal-message.error {
     padding: 10px;
     border-radius: 7px;
@@ -1899,53 +1814,41 @@ header.navbar {
     color: #a33131;
 }
 
-
-
-
 .calendar-day:not(.empty) {
     cursor: pointer;
 }
-
 
 .calendar-day:not(.empty):hover {
     box-shadow:
         inset 0 0 0 2px rgba(23, 107, 135, 0.25);
 }
 
-
-
 @media (max-width: 600px) {
     .calendar-modal {
         padding: 10px;
     }
-
 
     .calendar-modal-content {
         max-height: 95vh;
         border-radius: 14px;
     }
 
-
     .calendar-modal-body {
         padding: 18px;
     }
 
-
     .calendar-modal-header {
         padding: 17px;
     }
-
 
     .calendar-modal-header h2 {
         font-size: 18px;
     }
 }
 
-
 .calendar-day.non-working {
     background: rgba(73, 189, 139, 0.12);
 }
-
 
 .calendar-day.working {
     background: rgba(218, 92, 189, 0.08);
@@ -2006,8 +1909,6 @@ header.navbar {
 .btn-eliminar-incidencia:hover{
     background:#bb2d3b;
 }
-
-
 
 .justificante-form{
     display:flex;
@@ -2109,6 +2010,7 @@ header.navbar {
 }
 
 
+---------buscarpersonal-------
 
 .personal-table thead {
     background: #0f172a;
@@ -2120,7 +2022,6 @@ header.navbar {
     padding: 18px;
     text-align: left;
 }
-
 
 .personal-table tbody tr {
     transition: .2s;
@@ -2138,7 +2039,6 @@ header.navbar {
     padding: 18px;
     border-bottom: 1px solid #e2e8f0;
 }
-
 
 .personal-table-container {
     background: #ffffff;
@@ -2201,8 +2101,6 @@ header.navbar {
     box-shadow: 0 0 0 4px rgba(37,99,235,.15);
 }
 
-
-
 .resultados-info {
     margin-top: 15px;
     color: #475569;
@@ -2213,8 +2111,6 @@ header.navbar {
     color: #2563eb;
     font-size: 18px;
 }
-
-
 
 .btn-ver-kardex {
     display: inline-block;
@@ -2233,35 +2129,21 @@ header.navbar {
     transform: translateY(-2px);
 }
 
-
-
-
 .btn-ver {
 
     display: inline-block;
-
     background: #176b87;
-
     color: white;
-
     text-decoration: none;
-
     padding: 8px 14px;
-
     border-radius: 8px;
-
     font-size: 13px;
-
     font-weight: 600;
-
     transition: .2s;
-
 }
 
 .btn-ver-kardex:hover {
-
     background: #0d536b;
-
 }
 
 .photo-upload {

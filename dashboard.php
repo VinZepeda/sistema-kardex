@@ -233,7 +233,6 @@ if ($resultadoInhabiles) {
 $titulo = "Dashboard";
 
 require_once "includes/header.php";
-
 include "includes/menu.php";
 
 ?>
@@ -272,12 +271,24 @@ Sea honesto al registrarlos.
 }
 
 ?>
+        <div class="banner">
 
+                <h2>
+                    Banner de noticias
+                </h2>
+                <p>
+                    Informes semanales
+                </p>
+                
+        <section class="Banner-informativo">
+            
+            </section>
+
+            </div>
+
+  <!-- calendario -->
 
     <div class="calendar-top">
-
-
-        <!-- CALENDARIO GENERAL -->
 
         <section class="calendar-info">
 
@@ -289,9 +300,7 @@ Sea honesto al registrarlos.
                 Incapacidades, días económicos,
                 días inhábiles y festivos.
             </p>
-
         </section>
-
 
         <section class="color-reference">
 
@@ -299,9 +308,7 @@ Sea honesto al registrarlos.
                 Colores de referencia
             </h3>
 
-
             <div class="reference-items">
-
 
                 <div class="reference-item">
 
@@ -324,7 +331,6 @@ Sea honesto al registrarlos.
 
                 </div>
 
-
                 <div class="reference-item">
 
                     <span class="reference-color incapacity"></span>
@@ -335,16 +341,15 @@ Sea honesto al registrarlos.
 
                 </div>
 
-<div class="reference-item">
+        <div class="reference-item">
 
-    <span class="reference-color non-working"></span>
+            <span class="reference-color non-working"></span>
 
-    <span>
-        Días inhábiles
-    </span>
+            <span>
+                Días inhábiles
+            </span>
 
-</div>
-
+        </div>
 
                 <div class="reference-item">
 
@@ -360,12 +365,11 @@ Sea honesto al registrarlos.
 
     <span class="reference-color permission"></span>
 
-    <span>
-        Permisos
-    </span>
+            <span>
+                Permisos
+            </span>
 
-</div>
-
+        </div>
 
                 <div class="reference-item">
 
@@ -376,7 +380,6 @@ Sea honesto al registrarlos.
                     </span>
 
                 </div>
-
 
                 <div class="reference-item">
 
@@ -390,20 +393,15 @@ Sea honesto al registrarlos.
 
                 </div>
 
-
             </div>
 
         </section>
 
-
     </div>
-
 
     <section class="calendar-container">
 
-
         <div class="calendar-header">
-
 
             <button
                 type="button"
@@ -425,7 +423,6 @@ Sea honesto al registrarlos.
                 onclick="mesSiguiente()">
                 →
             </button>
-
 
         </div>
 
@@ -461,27 +458,19 @@ Sea honesto al registrarlos.
 
         </div>
 
-
-
         <div
             class="calendar-days"
             id="calendario"
         >
-
         </div>
 
-
     </section>
-
 
 <div
     id="modalIncidencias"
     class="calendar-modal"
 >
-
     <div class="calendar-modal-content">
-
-
 
         <div class="calendar-modal-header">
 
@@ -497,7 +486,6 @@ Sea honesto al registrarlos.
 
             </div>
 
-
             <button
                 type="button"
                 class="modal-close"
@@ -508,13 +496,7 @@ Sea honesto al registrarlos.
 
         </div>
 
-
-            
         <div class="calendar-modal-body">
-
-
-
-
 
             <div class="modal-incidencias-section">
 
@@ -522,16 +504,13 @@ Sea honesto al registrarlos.
                     Incidencias registradas
                 </h3>
 
-
                 <div
                     id="listaIncidencias"
                     class="modal-incidencias-list"
                 >
-
                     <div class="modal-empty">
 
-                        
-
+                
                         <p>
                             No hay incidencias registradas
                             para esta fecha.
@@ -543,19 +522,15 @@ Sea honesto al registrarlos.
 
             </div>
 
-
-
             <div class="modal-register-section">
 
                 <h3>
                     Registrar nueva incidencia
                 </h3>
 
-
                 <form
                     id="formIncidencia"
                 >
-
 
                     <input
                         type="hidden"
@@ -563,13 +538,11 @@ Sea honesto al registrarlos.
                         id="fechaIncidencia"
                     >
 
-
                     <input
                         type="hidden"
                         name="id_empleado"
                         value="<?= (int)$empleado["id_empleado"] ?>"
                     >
-
 
                     <div class="form-group">
 
@@ -619,7 +592,6 @@ Sea honesto al registrarlos.
 
                     </div>
 
-
                     <div class="form-group">
 
                         <label for="descripcion">
@@ -635,12 +607,10 @@ Sea honesto al registrarlos.
 
                     </div>
 
-
                     <div
                         id="mensajeIncidencia"
                         class="modal-message"
                     ></div>
-
 
                     <button
                         type="submit"
@@ -662,15 +632,9 @@ Sea honesto al registrarlos.
 
 </div>
 
-
-   
-
-
 </main>
 
-
 <script>
-
 
 const eventosCalendario = <?= json_encode(
     $eventosCalendario,
@@ -683,12 +647,7 @@ const diasInhabiles =
     JSON_UNESCAPED_UNICODE
 ) ?>;
 
-
-
-
 let fechaCalendario = new Date(2026, 9, 1);
-
-
 
 const meses = [
     "Enero",
@@ -705,91 +664,66 @@ const meses = [
     "Diciembre"
 ];
 
-
 function obtenerDiaInhabil(fecha){
-
     return diasInhabiles.find(
         item => item.fecha === fecha
     );
 
 }
 
-
-
 function generarCalendario() {
-
 
     const calendario =
         document.getElementById("calendario");
 
-
     const mesActual =
         document.getElementById("mesActual");
 
-
     calendario.innerHTML = "";
-
 
     const año =
         fechaCalendario.getFullYear();
 
-
     const mes =
         fechaCalendario.getMonth();
-
 
     mesActual.textContent =
         meses[mes] + " " + año;
 
-
-
     const primerDia =
         new Date(año, mes, 1);
-
-
 
     const ultimoDia =
         new Date(año, mes + 1, 0);
 
-
-
     let primerDiaSemana =
         primerDia.getDay() - 1;
 
-
     if (primerDiaSemana < 0) {
-
         primerDiaSemana = 6;
-
     }
-
 
     for (
         let i = 0;
         i < primerDiaSemana;
         i++
     ) {
-
         const espacio =
             document.createElement("div");
-
         espacio.className =
             "calendar-day empty";
 
         calendario.appendChild(espacio);
 
     }
-
     for (
         let dia = 1;
         dia <= ultimoDia.getDate();
         dia++
     ) {
 
-
         const celda =
             document.createElement("div");
-
 
         celda.className =
             "calendar-day";
@@ -797,14 +731,11 @@ function generarCalendario() {
         const mesNumero =
             String(mes + 1).padStart(2, "0");
 
-
         const diaNumero =
             String(dia).padStart(2, "0");
 
-
         const fecha =
             `${año}-${mesNumero}-${diaNumero}`;
-
 
         celda.dataset.fecha =
             fecha;
@@ -818,20 +749,13 @@ function generarCalendario() {
     }
 );
 
-
-
-
         const numeroDia =
             document.createElement("div");
 
-
         numeroDia.className =
             "calendar-day-number";
-
-
         numeroDia.textContent =
             dia;
-
 
         celda.appendChild(numeroDia);
 
@@ -840,275 +764,194 @@ function generarCalendario() {
             eventosCalendario.filter(
                 evento =>
                     evento.fecha === fecha
+                            );
+                const fechaObjeto =
+                    new Date(
+                        fecha + "T00:00:00"
+                    );
+                    const infoInhabil =
+                    obtenerDiaInhabil(
+                        fecha
+                    );
+
+                const diaSemana =
+                    fechaObjeto.getDay();
+                const esFinDeSemana =
+                    diaSemana === 0 ||
+                    diaSemana === 6;
+
+                if (esFinDeSemana) {
+                    celda.classList.add(
+                        "non-working"
+                    );
+                }
+
+                if (!esFinDeSemana) {
+                    celda.classList.add(
+                        "working"
+                    );
+                }
+
+                if (infoInhabil) {
+
+                    const tipoInhabil = String(infoInhabil.tipo || "").toLowerCase();
+                    const etiqueta = document.createElement("div");
+                    etiqueta.className = "calendar-bridge";
+
+                    if (tipoInhabil === "puente") {
+                        etiqueta.textContent = "Puente";
+                        celda.classList.add("non-working");
+
+                    } else if (tipoInhabil === "festivo") {
+                        etiqueta.textContent = "Festivo";
+                        celda.classList.add("holiday");
+                    } else {
+                        etiqueta.textContent = "Inhábil";
+                        celda.classList.add("non-working");
+                    }
+                    celda.classList.remove("working");
+                    celda.appendChild(etiqueta);
+
+                }
+                    eventos.slice(0, 4).forEach(
+                    evento => {
+                                const empleado =
+                                    document.createElement("div");
+
+                                empleado.className =
+                                    "calendar-employee";
+
+
+                if (evento.tipo === "economic") {
+                    if (evento.mio) {
+                        empleado.classList.add(
+                            "employee-my-economic"
+                        );
+
+                    } else {
+                        empleado.classList.add(
+                            "employee-economic"
+                        );
+
+                    }
+        }
+
+        else if (evento.tipo === "incapacity") {
+            empleado.classList.add(
+                "employee-incapacity"
             );
-
-const fechaObjeto =
-    new Date(
-        fecha + "T00:00:00"
-    );
-
-    const infoInhabil =
-    obtenerDiaInhabil(
-        fecha
-    );
-
-const diaSemana =
-    fechaObjeto.getDay();
-
-
-
-const esFinDeSemana =
-    diaSemana === 0 ||
-    diaSemana === 6;
-
-
-
-
-
-
-
-
-
-
-if (esFinDeSemana) {
-
-    celda.classList.add(
-        "non-working"
-    );
-
-}
-
-
-
-if (!esFinDeSemana) {
-
-    celda.classList.add(
-        "working"
-    );
-
-}
-
-
-if (infoInhabil) {
-
-    const tipoInhabil = String(infoInhabil.tipo || "").toLowerCase();
-
-    const etiqueta = document.createElement("div");
-
-    etiqueta.className = "calendar-bridge";
-
-    if (tipoInhabil === "puente") {
-
-        etiqueta.textContent = "⚠️ Puente";
-
-        celda.classList.add("non-working");
-
-    } else if (tipoInhabil === "festivo") {
-
-        etiqueta.textContent = "🎉 Festivo";
-
-        celda.classList.add("holiday");
-
-    } else {
-
-        etiqueta.textContent = "🚫 Inhábil";
-
-        celda.classList.add("non-working");
-
-    }
-
-    celda.classList.remove("working");
-
-    celda.appendChild(etiqueta);
-
-}
-
-
-
-       eventos.slice(0, 4).forEach(
-    evento => {
-
-
-                const empleado =
-                    document.createElement("div");
-
-
-                empleado.className =
-                    "calendar-employee";
-
-
-
-
-if (evento.tipo === "economic") {
-
-    if (evento.mio) {
-
-        empleado.classList.add(
-            "employee-my-economic"
-        );
-
-    } else {
-
-        empleado.classList.add(
-            "employee-economic"
-        );
-
-    }
-
-}
-
-else if (evento.tipo === "incapacity") {
-
-    empleado.classList.add(
-        "employee-incapacity"
-    );
-
-}
-
-else if (evento.tipo === "non-working") {
-
-    empleado.classList.add(
-        "employee-non-working"
-    );
-
-}
-
-else if (evento.tipo === "holiday") {
-
-    empleado.classList.add(
-        "employee-holiday"
-    );
-
-}
-
-else if (evento.tipo === "vacation") {
-
-    empleado.classList.add(
-        "employee-vacation"
-    );
-
-}
-
-else if (evento.tipo === "permission") {
-
-    empleado.classList.add(
-        "employee-permission"
-    );
-
-}
-
-else {
-
-    empleado.classList.add(
-        "employee-other"
-    );
-
-}
-
-let icono = "📌";
-
-switch (evento.tipo) {
-
-    case "economic":
-        icono = evento.mio ? "⭐" : "🟧";
-        break;
-
-    case "incapacity":
-        icono = "🟪";
-        break;
-
-    case "non-working":
-        icono = "🟢";
-        break;
-
-    case "holiday":
-        icono = "🟣";
-        break;
-
-    case "vacation":
-        icono = "🏖️";
-        break;
-
-    case "permission":
-        icono = "🟨";
-        break;
-
-    default:
-        icono = "📌";
-        break;
-}
+        }
+
+        else if (evento.tipo === "non-working") {
+            empleado.classList.add(
+                "employee-non-working"
+            );
+        }
+
+        else if (evento.tipo === "holiday") {
+            empleado.classList.add(
+                "employee-holiday"
+            );
+        }
+
+        else if (evento.tipo === "vacation") {
+            empleado.classList.add(
+                "employee-vacation"
+            );
+        }
+
+        else if (evento.tipo === "permission") {
+            empleado.classList.add(
+                "employee-permission"
+            );
+        }
+
+        else {
+            empleado.classList.add(
+                "employee-other"
+            );
+        }
+
+            let icono = "📌";
+
+            switch (evento.tipo) {
+
+                case "economic":
+                    icono = evento.mio ? "⭐" : "🟧";
+                    break;
+
+                case "incapacity":
+                    icono = "🟪";
+                    break;
+
+                case "non-working":
+                    icono = "🟢";
+                    break;
+
+                case "holiday":
+                    icono = "🟣";
+                    break;
+
+                case "vacation":
+                    icono = "🏖️";
+                    break;
+
+                case "permission":
+                    icono = "🟨";
+                    break;
+                    
+                default:
+                    icono = "📌";
+                    break;
+            }
 
                 empleado.textContent =
                     icono + " " + evento.nombre;
-
-
                 empleado.title =
                     evento.nombre;
-
-
                 celda.appendChild(
                     empleado
                 );
-
             }
         );
-
-
-       
 
        if (eventos.length > 4) {
 
     const empleadosExtra = document.createElement("div");
-
     empleadosExtra.className = "calendar-more";
-
     empleadosExtra.textContent =
         "+" + (eventos.length - 4) + " empleados";
-
     celda.appendChild(empleadosExtra);
 
 }
-
         const hoy =
             new Date();
-
 
         if (
             dia === hoy.getDate() &&
             mes === hoy.getMonth() &&
             año === hoy.getFullYear()
         ) {
-
             celda.classList.add(
                 "today"
             );
-
         }
-
-
         calendario.appendChild(
             celda
         );
-
     }
-
 }
 
 
 function mesAnterior() {
-
     fechaCalendario.setMonth(
         fechaCalendario.getMonth() - 1
     );
-
     generarCalendario();
 
 }
 
-
-
 function mesSiguiente() {
-
     fechaCalendario.setMonth(
         fechaCalendario.getMonth() + 1
     );
@@ -1117,60 +960,41 @@ function mesSiguiente() {
 
 }
 
-
-
-
 function abrirModal(fecha) {
-
-
 
     const modal =
         document.getElementById(
             "modalIncidencias"
         );
 
-
     const modalFecha =
         document.getElementById(
             "modalFecha"
         );
-
 
     const fechaIncidencia =
         document.getElementById(
             "fechaIncidencia"
         );
 
-
     const lista =
         document.getElementById(
             "listaIncidencias"
         );
-
-
-
     fechaIncidencia.value =
         fecha;
-
 
     const fechaObjeto =
         new Date(
             fecha + "T00:00:00"
         );
 
-
     const opciones = {
-
         weekday: "long",
-
         day: "numeric",
-
         month: "long",
-
         year: "numeric"
-
     };
-
 
     let fechaTexto =
         fechaObjeto.toLocaleDateString(
@@ -1178,21 +1002,14 @@ function abrirModal(fecha) {
             opciones
         );
 
-
     fechaTexto =
         fechaTexto.charAt(0).toUpperCase() +
         fechaTexto.slice(1);
 
-
     modalFecha.textContent =
         fechaTexto;
 
-
-
     lista.innerHTML = "";
-
-
-
     const eventos =
         eventosCalendario.filter(
             evento =>
@@ -1201,7 +1018,6 @@ function abrirModal(fecha) {
 
 
     if (eventos.length === 0) {
-
         lista.innerHTML = `
 
             <div class="modal-empty">
@@ -1209,87 +1025,61 @@ function abrirModal(fecha) {
                 <div class="modal-empty-icon">
                     📅
                 </div>
-
                 <p>
                     No hay incidencias registradas
                     para esta fecha.
                 </p>
-
             </div>
-
         `;
-
     }
-
 
     eventos.forEach(
         evento => {
-
             let clase =
                 "modal-event-other";
-
             let icono =
                 "📌";
-
 
            switch (evento.tipo) {
 
     case "economic":
-
         icono = evento.mio
             ? "⭐"
             : "🟧";
-
         break;
 
     case "incapacity":
-
         icono = "🟪";
-
         break;
 
     case "non-working":
-
         icono = "🟢";
-
         break;
 
     case "holiday":
-
         icono = "🟣";
-
         break;
 
     case "vacation":
-
         icono = "🌴";
-
         break;
 
     case "permission":
-
         icono = "🟨";
-
         break;
 
     default:
-
         icono = "📌";
-
         break;
 }
-
 
             const elemento =
                 document.createElement(
                     "div"
                 );
 
-
             elemento.className =
                 "modal-event " + clase;
-
-
           elemento.innerHTML = `
 
     <div class="modal-event-icon">
@@ -1297,7 +1087,6 @@ function abrirModal(fecha) {
     </div>
 
     <div class="modal-event-info">
-
         <strong>
             ${escapeHtml(evento.nombre)}
         </strong>
@@ -1315,7 +1104,6 @@ function abrirModal(fecha) {
               `
             : ""
         }
-
     </div>
 
     ${
@@ -1330,66 +1118,44 @@ function abrirModal(fecha) {
         `
         : ""
     }
-
 `;
-
-
             lista.appendChild(
                 elemento
             );
-
         }
     );
-
-
-
     modal.classList.add(
         "active"
     );
-
-
     document.body.classList.add(
         "modal-open"
     );
-
 }
 
-
-
 function cerrarModal() {
-
     const modal =
         document.getElementById(
             "modalIncidencias"
         );
-
-
     modal.classList.remove(
         "active"
     );
 
-
     document.body.classList.remove(
         "modal-open"
     );
-
 }
 
 async function eliminarIncidencia(id){
-
     const confirmar =
         confirm(
             "¿Deseas eliminar esta incidencia?"
         );
 
     if(!confirmar){
-
         return;
-
     }
-
     try{
-
         const respuesta =
             await fetch(
                 "eliminar_incidencia.php",
@@ -1403,7 +1169,6 @@ async function eliminarIncidencia(id){
                         "id=" + id
                 }
             );
-
         const resultado =
             await respuesta.json();
 
@@ -1414,21 +1179,15 @@ async function eliminarIncidencia(id){
         if(
             resultado.success
         ){
-
             location.reload();
-
         }
-
     }
     catch(error){
-
         alert(
             "Error al eliminar."
         );
     }
 }
-
-
 
 document
     .getElementById(
@@ -1441,15 +1200,10 @@ document
             if (
                 evento.target === this
             ) {
-
                 cerrarModal();
-
             }
-
         }
     );
-
-
 
 document.addEventListener(
     "keydown",
@@ -1458,17 +1212,12 @@ document.addEventListener(
         if (
             evento.key === "Escape"
         ) {
-
             cerrarModal();
-
         }
-
     }
 );
 
-
 function escapeHtml(texto) {
-
     const div =
         document.createElement(
             "div"
@@ -1476,12 +1225,9 @@ function escapeHtml(texto) {
 
     div.textContent =
         texto ?? "";
-
     return div.innerHTML;
 
 }
-
-
 
 document
     .getElementById(
@@ -1569,12 +1315,6 @@ document
                 mensaje.textContent =
                     resultado.message;
 
-
-                /*
-                 * Recargar la información
-                 * del calendario.
-                 */
-
                 const fecha =
                     datos.get(
                         "fecha"
@@ -1602,28 +1342,19 @@ document
                 mensaje.textContent =
                     error.message ||
                     "Ocurrió un error.";
-
             }
 
+                boton.disabled =
+                    false;
 
-            boton.disabled =
-                false;
-
-
-            boton.textContent =
-                "+ Registrar incidencia";
-
-        }
+                 boton.textContent =
+                    "+ Registrar incidencia";
+         }
     );
 
-
 generarCalendario();
-
 </script>
 
-
 <?php
-
 include "includes/footer.php";
-
 ?>
