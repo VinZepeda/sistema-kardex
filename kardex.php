@@ -254,10 +254,10 @@ include "includes/menu.php";
 
         </div>
 
-    <section class="content-card">
+    <section class="content-card-kardex">
 
 
-        <div class="section-header">
+        <div class="section-header-kardex">
 
 
             <div>
@@ -277,7 +277,7 @@ include "includes/menu.php";
 
 
 
-        <div class="info-grid">
+        <div class="info-grid-kardex">
 
 
             <!-- NOMBRE -->
@@ -490,10 +490,10 @@ include "includes/menu.php";
 
 
 
-    <section class="content-card">
+    <section class="content-card-kardex">
 
 
-        <div class="section-header">
+        <div class="section-header-kardex">
 
 
             <div>
@@ -513,7 +513,7 @@ include "includes/menu.php";
 
 
 
-        <div class="info-grid">
+        <div class="info-grid-kardex">
 
 
             <!-- PUESTO -->

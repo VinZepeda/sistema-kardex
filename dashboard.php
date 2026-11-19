@@ -271,22 +271,61 @@ Sea honesto al registrarlos.
 }
 
 ?>
-        <div class="banner">
-
-                <h2>
-                    Banner de noticias
-                </h2>
-                <p>
-                    Informes semanales
-                </p>
-                
+    <div class="banner">
+        <div class="banner-header">
+            <div>
+                <h2>Banner de noticias</h2>
+                <p>Informes semanales</p>
+            </div>
+            <span class="banner-badge">Actualizado</span>
+        </div>
+        
         <section class="Banner-informativo">
-            
-            </section>
 
+            <div class="carrusel-noticias">
+
+                <article class="noticia-card activa">
+                    <span class="noticia-tag">Aviso</span>
+                    <h3>Cierre de reportes semanales</h3>
+                    <p>Recuerda subir tus incidencias y justificantes antes del viernes a las 18:00 hrs.</p>
+                </article>
+                
+                <article class="noticia-card">
+                    <span class="noticia-tag">Recordatorio</span>
+                    <h3>Días festivos y puentes</h3>
+                    <p>Consulta el calendario general para revisar las fechas marcadas este mes.</p>
+                </article>
+            </div>
+            
+            <div class="carrusel-controles">
+
+                <button type="button" id="btnPrevNoticia" aria-label="Noticia anterior">
+                    ←
+                </button>
+                
+                <div id="indicadoresNoticias" class="carrusel-indicadores">
+
+                </div>
+                
+                <button type="button" id="btnNextNoticia" aria-label="Siguiente noticia">
+                    →
+                </button>
             </div>
 
-  <!-- calendario -->
+    <form id="formNuevaNoticia" class="form-admin-noticia">
+        <input type="text" id="noticiaTag" placeholder="Etiqueta (ej. AVISO)" maxlength="20" required>
+        <input type="text" id="noticiaTitulo" placeholder="Título de la noticia" maxlength="80" required>
+        <input type="text" id="noticiaMensaje" placeholder="Mensaje breve..." maxlength="180" required>
+
+        <button type="submit">
+            Publicar noticia
+        </button>
+    </form>
+
+        </section>
+    </div>
+
+<!-- calendario --->
 
     <div class="calendar-top">
 
@@ -295,11 +334,6 @@ Sea honesto al registrarlos.
             <h2>
                 Calendario General
             </h2>
-
-            <p>
-                Incapacidades, días económicos,
-                días inhábiles y festivos.
-            </p>
         </section>
 
         <section class="color-reference">
@@ -384,7 +418,7 @@ Sea honesto al registrarlos.
                 <div class="reference-item">
 
                     <span class="reference-warning">
-                
+                     🚧
                     </span>
 
                     <span>

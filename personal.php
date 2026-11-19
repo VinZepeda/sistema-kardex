@@ -240,7 +240,7 @@ include "includes/menu.php";
 
 ?>
 
-<main class="main-content">
+<main class="main-content-personal">
 
     <div class="page-header-personal">
 
@@ -256,9 +256,9 @@ include "includes/menu.php";
 
     </div>
 
-   <section class="search-container">
+   <section class="buscar-container-personal">
 
-    <div class="form-group">
+    <div class="form-group-buscar-personal">
 
         <label for="buscarPersonal">
             Buscar empleado
@@ -272,7 +272,7 @@ include "includes/menu.php";
 
     </div>
 
-    <div class="resultados-info">
+    <div class="resultados-info-personal">
 
         Mostrando
         <strong id="contadorResultados">0</strong>
@@ -280,19 +280,13 @@ include "includes/menu.php";
 
     </div>
 
-
-
-
 </section>
-
-
-
 
     </section>
 
-    <section class="personal-table-container">
+    <section class="personal-tabla-container">
 
-        <table class="personal-table">
+        <table class="personal-tabla">
 
            <thead>
 <tr>
@@ -337,10 +331,6 @@ include "includes/menu.php";
     </section>
 
 </main>
-
-
-
-
 
 <?php
 
